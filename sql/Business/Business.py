@@ -1,26 +1,45 @@
-from DataAccess import studentDB as S
+from DataAccess import customerDB as S
 
 
 class Business:
 
-    def StudentID(id):
+    def AllCustomer():
         print('-----------------------------------------')
-        if int(id)-1<len(S.StudentDB.FetchAll()):
-            student = S.StudentDB.FetchAll()
-            print('Student id: ', student[int(id)-1].id)
-            print('Student name: ', student[int(id)-1].name)
-            print('Student grade: ', student[int(id)-1].grade)
-            print('Student phone: ', student[int(id)-1].phone)
+        customers = S.CustomerDB.FetchAll()
+        for customer in customers:
+            print(customer.getCustomer())
+        print('-----------------------------------------')
+
+    def CustomerID(id):
+        print('-----------------------------------------')
+        if int(id)-1<len(S.CustomerDB.FetchAll()):
+            customers = S.CustomerDB.FetchAll()
+            print(customers[int(id)-1].getCustomer())
         else:
             print('Error in ID')
         print('-----------------------------------------')
 
-    def StudentExcellent():
+    def CustomerName(name):
         print('-----------------------------------------')
-        student = S.StudentDB.FetchExcellent()
-        for stu in student:
-            print('Student id: ', stu.id)
-            print('Student name: ', stu.name)
-            print('Student grade: ', stu.grade)
-            print('Student phone: ', stu.phone)
-            print('-----------------------------------------')
+        customers = S.CustomerDB.FetchByName(name)
+        for c in customers:
+            print(c.getCustomer())
+        print('-----------------------------------------')
+
+    def InsertCustomer(name,phone):
+        print('-----------------------------------------')
+        inserted = S.CustomerDB.InsertCustomer(name,phone)
+        print(inserted)
+        print('-----------------------------------------')
+
+    def DeleteCustomer(id):
+        print('-----------------------------------------')
+        delete = S.CustomerDB.DeleteCustomer(id)
+        print(delete)
+        print('-----------------------------------------')
+
+    def UpdateCustomerPhoneNumber(id, phone):
+        print('-----------------------------------------')
+        update = S.CustomerDB.UpdateCustomerPhoneNumber(id, phone)
+        print(update)
+        print('-----------------------------------------')
